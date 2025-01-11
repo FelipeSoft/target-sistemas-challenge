@@ -1,25 +1,30 @@
 package exercise
 
 import (
-	"fmt"
+    "bufio"
+    "fmt"
+    "os"
 )
 
 func RunExercise05() {
-	var input string
-	fmt.Print("Enter a string to reverse: ")
-	fmt.Scanln(&input)
+    var input string
+    fmt.Print("Enter a string to reverse: ")
 
-	reversedString := reverseString(input)
+    reader := bufio.NewReader(os.Stdin)
+    input, _ = reader.ReadString('\n')
+    input = input[:len(input)-1]
 
-	fmt.Printf("Reversed string: %s\n", reversedString)
+    reversedString := reverseString(input)
+
+    fmt.Printf("Reversed string: %s\n", reversedString)
 }
 
 func reverseString(s string) string {
-	runes := []rune(s)
+    runes := []rune(s)
 
-	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
-		runes[i], runes[j] = runes[j], runes[i]
-	}
+    for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+        runes[i], runes[j] = runes[j], runes[i]
+    }
 
-	return string(runes)
+    return string(runes)
 }
